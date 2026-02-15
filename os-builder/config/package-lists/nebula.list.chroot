@@ -1,0 +1,39 @@
+# Nebula NAS OS - Essential Packages
+
+# Base System
+systemd-sysv
+linux-image-amd64
+firmware-linux-nonfree
+
+# Storage
+btrfs-progs
+mdadm
+lvm2
+smartmontools
+hdparm
+
+# Networking
+network-manager
+ethtool
+iptables
+nftables
+
+# File Services
+samba
+nfs-kernel-server
+
+# Virtualization / Helpers
+docker.io
+cloud-init
+sudo
+curl
+wget
+openssh-server
+ca-certificates
+jq
+
+# Misc
+htop
+vim
+bash-completion
+man-db

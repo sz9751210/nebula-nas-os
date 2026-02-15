@@ -1,0 +1,12 @@
+#!/bin/sh
+
+lb config noauto \
+    --distribution bookworm \
+    --archive-areas "main contrib non-free-firmware" \
+    --architecture amd64 \
+    --linux-flavours amd64 \
+    --bootloader syslinux,grub-efi \
+    --binary-images iso-hybrid \
+    --memtest none \
+    --uefi-secure-boot disable \
+    "${@}"

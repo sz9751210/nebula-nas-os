@@ -1,0 +1,36 @@
+#!/bin/bash
+set -e
+
+echo "hook: Installing Nebula Core Application..."
+
+# Create installation directories
+mkdir -p /opt/nebula/backend
+mkdir -p /opt/nebula/frontend
+
+# Copy backend binary (Assuming it's pre-built in the chroot/includes.chroot/opt/nebula/backend)
+# In a real scenario, we would copy from external source, but for live-build, we use includes.chroot
+# So this hook is mainly for setting permissions and enabling services
+
+chmod +x /opt/nebula/backend/server
+
+# Create systemd service
+cat <<EOF > /etc/systemd/system/nebula-backend.service
+[Unit]
+Description=Nebula NAS OS Backend API
+After=network.target
+
+[Service]
+ExecStart=/opt/nebula/backend/server
+WorkingDirectory=/opt/nebula/backend
+Restart=always
+User=root
+Environment=NEBULA_ENV=production
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+# Enable services
+systemctl enable nebula-backend
+systemctl enable docker
+systemctl enable ssh
